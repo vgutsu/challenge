@@ -5,9 +5,9 @@ import com.google.gson.annotations.SerializedName;
 
 public class Tour {
 
-    @SerializedName("uid")
+    @SerializedName("id")
     @Expose
-    private String uid;
+    private String id;
     @SerializedName("title")
     @Expose
     private String title;
@@ -18,12 +18,12 @@ public class Tour {
     @Expose
     private String desc;
 
-    public String getUid() {
-        return uid;
+    public String getId() {
+        return id;
     }
 
-    public void setUid(String uid) {
-        this.uid = uid;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getTitle() {

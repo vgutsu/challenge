@@ -17,4 +17,6 @@ import retrofit2.http.GET;
 public interface ApiService {
     @GET("code_challenge/countries_v1.json")
     Call<List<Country>> countries();
+    @GET("code_challenge/countries_v2.json")
+    Call<List<Country>> countriesV2();
 }
