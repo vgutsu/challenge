@@ -25,10 +25,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RestClient {
     private static final String BASE_URL = "http://staticfiles.popguide.me/";
     private static RestClient sRestClientSingleton;
+    private final Context context;
     private Retrofit retrofit;
     private ApiService apiService;
 
     private RestClient(Context context) {
+        this.context = context;
         HttpLoggingInterceptor logging = new HttpLoggingInterceptor();
         logging.setLevel(HttpLoggingInterceptor.Level.BODY);
         OkHttpClient.Builder httpclient = new OkHttpClient.Builder();
@@ -68,11 +70,11 @@ public class RestClient {
         }
     }
 
-    private static final Interceptor CACHE_CONTROL = new Interceptor() {
+    private final Interceptor CACHE_CONTROL = new Interceptor() {
         @Override
         public Response intercept(Chain chain) throws IOException {
             Response originalResponse = chain.proceed(chain.request());
-            if (Utils.isNetworkAvailable()) {
+            if (Utils.isNetworkAvailable(context)) {
                 int maxAge = 60;  // time for reading cache
                 return originalResponse.newBuilder()
                         .header("Cache-Control", "public, max-age=" + maxAge)
@@ -85,10 +87,6 @@ public class RestClient {
             }
         }
     };
-
-    public Retrofit retrofit() {
-        return retrofit;
-    }
 
     public static synchronized RestClient getInstance(Context context) {
         if (null == sRestClientSingleton) {
