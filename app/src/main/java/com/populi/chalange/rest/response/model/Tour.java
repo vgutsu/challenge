@@ -5,7 +5,7 @@ import com.google.gson.annotations.SerializedName;
 
 public class Tour {
 
-    @SerializedName("id")
+    @SerializedName("uid")
     @Expose
     private String id;
     @SerializedName("title")

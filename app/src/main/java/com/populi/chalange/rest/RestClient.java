@@ -96,6 +96,6 @@ public class RestClient {
     }
 
     public void getCountries(Callback<List<Country>> callback) {
-        apiService.countriesV2().enqueue(callback);
+        apiService.countries().enqueue(callback);
     }
 }
